@@ -1,0 +1,68 @@
+﻿@*@model IEnumerable<AgenciaViajes_Karina.Models.Agencia>*@
+@using PagedList.Mvc @*como va llegar una lista paginada*@
+@model PagedList.IPagedList<AgenciaViajesKarinaHeras.Models.Agencia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Agencia</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar : @Html.TextBox("searchString")
+        <input type="submit" value="Buscar" />
+    </p>
+}
+
+
+
+<p>
+    @Html.ActionLink("Crea una nueva agencia", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Codigo de viaje
+        </th>
+        <th>
+            Precio
+        </th>
+        <th>
+            @Html.ActionLink("Fecha de viaje", "Index", new { sortOrder = ViewBag.NameSortParam })
+
+        </th>
+        <th>
+            @Html.ActionLink("Role", "Index", new { sortOrder = ViewBag.DateSortParam })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoViaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaViaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AgenciaId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AgenciaId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AgenciaId })
+            </td>
+        </tr>
+    }
+
+</table>
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount @*aqui  en el nuemro de pagina*@
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.currentFilter }))

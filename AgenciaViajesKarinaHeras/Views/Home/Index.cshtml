@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="text-center">Agencia de Viajes Escàpate</h1>
+    <h3 class="text-center">Bienvenido a tu proxima aventura</h3>
+    <p class="text-center">
+        <img src="~/Content/image/logoAgencia.png" />
+    </p>
+
+</div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="indt">Agencia</h2>
+            <p>Reserva tu vuelo+hotel de la forma más cómoda y en un mismo paso. Las islas, España, Europa, etc. ¡Escoge el destino que más te guste y preocúpate solo de disfrutar!</p>
+            <img src="~/Content/image/graciaimage.png" /><br />
+            <br />
+            <p><a>@Html.ActionLink("Agencia", "Index", "Agencia")</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2 class="indt">Destinos</h2>
+            <p>Si quieres vivir mil experiencias en un solo viaje, no lo dudes, reserva un multidestino y así conocerás lo mejor de cada lugar.</p>
+            <img src="~/Content/image/portugalimage.png" /><br />
+            <br />
+            <p><a>@Html.ActionLink("Nuestros Destinos", "Index", "Destino")</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2 class="indt">Viajes</h2>
+            <p>Te ofrecemos diferentes opciones para que viajes por España, desde hoteles en las costas, circuitos, vuelo + hotel a las islas, planes de fin de semana y mucho más.</p>
+            <img src="~/Content/image/Viajesimg.png" /> <br />
+            <br />
+            <p>@Html.ActionLink("Viajero", "Index", "Viajeroes")</p>
+        </div>
+    </div>

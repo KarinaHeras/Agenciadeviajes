@@ -1,0 +1,50 @@
+﻿@model AgenciaViajesKarinaHeras.Models.Destino
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Destino</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoViaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoViaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViajeroId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViajeroId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ciudad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ciudad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pais)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pais)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DestinoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

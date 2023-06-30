@@ -1,0 +1,73 @@
+﻿@*@model IEnumerable<AgenciaViajesKarinaHeras.Models.Viajero>*@
+@using PagedList.Mvc @*como va llegar una lista paginada*@
+@model PagedList.IPagedList<AgenciaViajesKarinaHeras.Models.Viajero>
+
+@{
+    ViewBag.Title = "Viajero";
+}
+
+<h2>Viajero</h2>
+
+<p>
+    @Html.ActionLink("Crea un nuevo viajero", "Create")
+</p>
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar Viajero: @Html.TextBox("searchString")
+        <input type="submit" value="Buscar" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Dni)*@
+            DNI
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Nombre)*@
+            @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.NameSortParam })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Telefono)*@
+            Telefono
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FechaNacimiento)*@
+            Fecha Nacimiento
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdViajero }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdViajero }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdViajero })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount @*aqui  en el nuemro de pagina*@
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.currentFilter }))

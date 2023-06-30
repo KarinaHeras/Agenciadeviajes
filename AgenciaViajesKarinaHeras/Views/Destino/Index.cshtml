@@ -1,0 +1,66 @@
+﻿@using PagedList.Mvc @*como va llegar una lista paginada*@
+@model PagedList.IPagedList<AgenciaViajesKarinaHeras.Models.Destino>
+
+@{
+    ViewBag.Title = "Destino";
+}
+
+
+
+<h2>Destino</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar pais de destino: @Html.TextBox("searchString")
+        <input type="submit" value="Buscar" />
+    </p>
+}
+<p>
+    @Html.ActionLink("Crea un nuevo destino", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Codigo de Viaje
+        </th>
+        <th>
+            Id de Viajero
+        </th>
+        <th>
+          
+            Ciudad
+        </th>
+        <th>
+            @Html.ActionLink("Pais", "Index", new { sortOrder = ViewBag.NameSortParam })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoViaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViajeroId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ciudad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pais)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.DestinoID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.DestinoID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.DestinoID })
+            </td>
+        </tr>
+    }
+
+</table>
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount @*aqui  en el nuemro de pagina*@
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.currentFilter }))
